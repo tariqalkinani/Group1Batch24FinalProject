@@ -17,14 +17,11 @@ import java.text.SimpleDateFormat;
 import java.time.Duration;
 import java.util.Date;
 
-import static Utils.PageInitializer.initializePageObjects;
-
-public class CommonMethods {
+public class CommonMethods extends PageInitializer{
 
     public static WebDriver driver;
 
     public void openBrowserAndLaunchApplication() {
-        // initializePageObjects();
         switch (Utils.ConfigReader.read("browser")){
 
             case "Chrome":
@@ -45,6 +42,7 @@ public class CommonMethods {
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
         driver.get(Utils.ConfigReader.read("url"));
+        //this ,method will call all the objects
         initializePageObjects();
 
     }
