@@ -9,6 +9,7 @@ public class PageInitializer {
     public static DashboardPage dashboardPage;
     public static EmployeeSearchPage employeeSearchPage;
     public static ValidateCredentialsPage validateCredentialsPage;
+    public static AdminPage adminPage;
 
     public static void initializePageObjects(){
         loginPage=new LoginPage();
@@ -16,6 +17,7 @@ public class PageInitializer {
         dashboardPage=new DashboardPage();
         employeeSearchPage=new EmployeeSearchPage();
         validateCredentialsPage=new ValidateCredentialsPage();
+        adminPage=new AdminPage();
 
     }
 }

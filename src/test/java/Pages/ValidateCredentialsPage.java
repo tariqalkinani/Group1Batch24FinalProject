@@ -11,7 +11,7 @@ public class ValidateCredentialsPage extends CommonMethods {
     public WebElement idField;
 
     @FindBy(xpath = "(//*[@class='oxd-table-cell oxd-padding-cell'])[3]")
-    public WebElement firstAndmiddleField;
+    public WebElement firstAndMiddleField;
 
     @FindBy(xpath = "(//*[@class='oxd-table-cell oxd-padding-cell'])[4]")
     public WebElement lastField;

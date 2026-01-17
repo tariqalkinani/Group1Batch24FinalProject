@@ -19,6 +19,9 @@ public class DashboardPage extends CommonMethods {
     @FindBy(xpath = "//*[@class='oxd-userdropdown-name']")
     public WebElement welcomeScreenLoc;
 
+    @FindBy(xpath = "//*[@class='oxd-main-menu-item']")
+    public WebElement adminPageOption;
+
     public DashboardPage(){
 
         PageFactory.initElements(driver, this);

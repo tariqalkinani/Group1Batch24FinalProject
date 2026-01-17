@@ -19,7 +19,7 @@ import java.util.Date;
 
 import static Utils.PageInitializer.initializePageObjects;
 
-public class CommonMethods {
+public class CommonMethods extends PageInitializer {
 
     public static WebDriver driver;
 
