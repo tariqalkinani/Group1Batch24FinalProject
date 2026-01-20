@@ -7,7 +7,8 @@ import org.openqa.selenium.support.PageFactory;
 
 public class LoginPage extends CommonMethods {
 
-    @FindBy(xpath="//*[@name='username']")
+    @FindBy(xpath="//input[@placeholder='Username']")
+    //input[@placeholder='Username']
     public WebElement usernameField;
 
     @FindBy(xpath="//*[@name='password']")
