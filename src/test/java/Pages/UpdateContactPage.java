@@ -44,12 +44,9 @@ public class UpdateContactPage extends CommonMethods {
     @FindBy(xpath="//button[@class='oxd-button oxd-button--medium oxd-button--secondary orangehrm-left-space']")
     public WebElement saveButton;
 
-    @FindBy(xpath="//button[@class='oxd-button oxd-button--medium oxd-button--secondary orangehrm-left-space']")
-    public WebElement saveButton2;
-
-
 
     public UpdateContactPage(){
+
         PageFactory.initElements(driver, this);
     }
 

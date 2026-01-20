@@ -18,6 +18,8 @@ public class UpdateContactSteps extends CommonMethods {
 
     @When("user enters valid username and password")
     public void user_enters_valid_username_and_password() {
+
+
         sendText(ConfigReader.read("userName"), loginPage.usernameField);
         sendText(ConfigReader.read("password"), loginPage.passwordField);
     }
@@ -138,13 +140,12 @@ public class UpdateContactSteps extends CommonMethods {
 
 
 
-
-
-
-
-
     }
 
 
 
+
 }
+
+
+
