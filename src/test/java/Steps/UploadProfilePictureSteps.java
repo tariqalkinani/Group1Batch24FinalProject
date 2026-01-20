@@ -28,7 +28,7 @@ public class UploadProfilePictureSteps extends CommonMethods {
     @When("user profile should display the updated profile picture")
     public void user_profile_should_display_the_updated_profile_picture() throws InterruptedException {
         WebElement profilePic = driver.findElement(xpath("//input[@type='file']")); // replace with actual locator
-        String path="C:\\Users\\Nabil\\Desktop\\Final\\group1B24\\src\\test\\Resources\\test-images//profile_test.png";
+        String path="C:\\Users\\tariq\\OneDrive\\Desktop\\Final Project//profile_test.png";
         profilePic.sendKeys(path);
         // String fullPath = "C:\\Users\\Nabil\\Desktop\\Final\\group1B24\\src\\test\\Resources\\test-images\\profile_test.png";  // ← ensure filename is here!
 

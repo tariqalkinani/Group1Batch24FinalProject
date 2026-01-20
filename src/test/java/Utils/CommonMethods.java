@@ -17,7 +17,7 @@ import java.text.SimpleDateFormat;
 import java.time.Duration;
 import java.util.Date;
 
-
+public class CommonMethods extends PageInitializer{
     public static WebDriver driver;
 
     public void openBrowserAndLaunchApplication() {

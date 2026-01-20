@@ -23,7 +23,7 @@ public class EditEmployeePage extends CommonMethods {
     public WebElement empName;
     @FindBy(xpath = "//button[@class='oxd-button oxd-button--medium oxd-button--secondary orangehrm-left-space']")
     public WebElement savebutton;
-    @FindBy(xpath ="//input[@class='oxd-input oxd-input--active']")
+    @FindBy(xpath ="//label[text()='Employee Id']/following::input[1]")
     public WebElement employeeId;
     @FindBy(xpath = "//span[@class='oxd-radio-input oxd-radio-input--active --label-right oxd-radio-input'][2]")
     public WebElement genderlocator;
@@ -39,56 +39,9 @@ public class EditEmployeePage extends CommonMethods {
     public WebElement American;
     @FindBy(xpath = "//div[@class='oxd-select-text-input'and text()='Married']")
     public WebElement Married;
+    @FindBy(xpath = "//a[text()='Personal Details']")
+    public WebElement personalDetailsHeader;
 
-    public void selectDropdownOptionByText(WebElement dropdownContainer, String optionText) {
-        // Click the container to open dropdown
-        jsClick(dropdownContainer);
-
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
-
-        // Wait for any dropdown to appear
-        List<WebElement> options = wait.until(driver ->
-                driver.findElements(By.xpath("//div[contains(@class,'oxd-select-dropdown')]//div"))
-                        .stream()
-                        .filter(WebElement::isDisplayed)
-                        .collect(Collectors.toList())
-        );
-
-        // Click the option with matching text
-        boolean clicked = false;
-        for (WebElement option : options) {
-            if (option.getText().trim().equals(optionText)) {
-                jsClick(option);
-                clicked = true;
-                break;
-            }
-        }
-
-        if (!clicked) {
-            throw new RuntimeException("Option '" + optionText + "' not found in dropdown");
-        }
-    }
-
-    // JS click helper
-    public void jsClick(WebElement element) {
-        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", element);
-    }
-
-    public List<String> getNationalityDropdownOptions() {
-
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        wait.until(ExpectedConditions.visibilityOf(Nationalitydropdown));
-
-        Select select = new Select(Nationalitydropdown);
-        List<WebElement> options = select.getOptions();
-
-        List<String> optionTexts = new ArrayList<>();
-        for (WebElement option : options) {
-            optionTexts.add(option.getText().trim());
-        }
-
-        return optionTexts;
-    }
 
     public EditEmployeePage(){
 

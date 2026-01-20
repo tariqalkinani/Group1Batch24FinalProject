@@ -27,7 +27,7 @@ public class PageInitializer {
         adminPage=new AdminPage();
         pimPage=new PimPage();
         updateContactPage=new UpdateContactPage();
-        updateContactPage=new UpdateContactPage();
+        uploadEmployeeImagePage=new UploadEmployeeImagePage();
         editEmployeePage=new EditEmployeePage();
 
     }
