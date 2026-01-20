@@ -24,6 +24,8 @@ import java.util.Date;
         switch (Utils.ConfigReader.read("browser")){
 
             case "Chrome":
+               // ChromeOptions options = new ChromeOptions();
+                //options.addArguments("--headless");
                 driver=new ChromeDriver();
                 break;
             case "FireFox":
@@ -96,6 +98,7 @@ import java.util.Date;
 
 
     public byte[] takeScreenshot(String fileName){
+        //it accepts array of byte in cucumber for the screenshot
         TakesScreenshot ts = (TakesScreenshot) driver;
         byte[] picByte = ts.getScreenshotAs(OutputType.BYTES);
         File sourceFile = ts.getScreenshotAs(OutputType.FILE);
@@ -112,7 +115,10 @@ import java.util.Date;
     }
 
     public String getTimeStamp(String pattern){
+        //this method will return the timestamp which we will add in ss method
         Date date = new Date();
+
+        //yyyy-mm-dd-hh-mm-ss
         SimpleDateFormat sdf = new SimpleDateFormat(pattern);
         return sdf.format(date);
     }

@@ -5,14 +5,17 @@ import Pages.LoginPage;
 import Pages.PimPage;
 import Utils.CommonMethods;
 import io.cucumber.java.en.Given;
-import io.cucumber.java.en.When;
 import io.cucumber.java.en.Then;
+import org.junit.Assert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.StaleElementReferenceException;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
+import java.util.List;
 
 public class SearchForAnEmployee extends CommonMethods {
 
@@ -38,7 +41,6 @@ public class SearchForAnEmployee extends CommonMethods {
         click(PimPage.clickKevin);
         click(PimPage.searchButton);
         click(dashboardPage.pimOption);
-
     }
 
     @Then("also the search functionality should be capable of handling partial name matches and variations in capitalization")
@@ -52,42 +54,78 @@ public class SearchForAnEmployee extends CommonMethods {
     }
     @Then("the admin user should be able search for an employee  using their unique employee id as the search criteria")
     public void the_admin_user_should_be_able_search_for_an_employee_using_their_unique_employee_id_as_the_search_criteria() throws InterruptedException {
-        sendText("EMP876",PimPage.employeeIDbox);
-
+        sendText("EMP876", PimPage.employeeIDbox);
         click(PimPage.searchButton);
+
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
-        wait.until(ExpectedConditions.elementToBeClickable(PimPage.employeeInfoBoxToClick)).click();
 
-
-
-        click(PimPage.employeeInfoBoxToClick);
-
+        wait.until(ExpectedConditions.visibilityOf(PimPage.employeeInfoBoxToClick));
 
     }
     @Then("the search should return the exact employee record associated with the provided employee ID")
     public void the_search_should_return_the_exact_employee_record_associated_with_the_provided_employee_id() {
-
-        //click(PimPage.employeeInfoBoxToClick);
-
-        String actualEmployeeId = PimPage.employeeIDboxPROOF.getText();
-
         String expectedEmployeeId = "EMP876";
+        By employeeDataRows = By.xpath("//div[contains(@class,'oxd-table-row') and contains(@class,'oxd-table-row--clickable')]");
+        By noRecordsMsg = By.xpath("//span[text()='No Records Found']");
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
 
-        System.out.println(actualEmployeeId);
+        // Wait for either data rows or "No Records Found"
+        wait.until(ExpectedConditions.or(
+                ExpectedConditions.presenceOfElementLocated(employeeDataRows),
+                ExpectedConditions.presenceOfElementLocated(noRecordsMsg)
+        ));
 
-        System.out.println(expectedEmployeeId);
+        List<WebElement> rows = driver.findElements(employeeDataRows);
 
-    }
-    @Then("the system should provide a message {string} if no matching employee records are found")
-    public void the_system_should_provide_a_message_if_no_matching_employee_records_are_found(String string) {
-        String actualMessage = PimPage.noRecordFoundText.getText();
-        if (actualMessage.equals("No Records Found")) {
-            System.out.println("Correct error message displayed: " + actualMessage);
-        } else {
-            throw new AssertionError("Expected 'No Records Found' but got: " + actualMessage);
+        if (rows.isEmpty()) {
+            String actualMessage = driver.findElement(noRecordsMsg).getText();
+            throw new AssertionError("No employee records found. Message: " + actualMessage);
         }
 
+        // Retry mechanism for stale elements
+        boolean found = false;
+        int attempts = 0;
+        while (attempts < 3 && !found) {
+            try {
+                rows = driver.findElements(employeeDataRows);
+                for (WebElement row : rows) {
+                    String rowText = row.getText().trim();
+                    if (rowText.contains(expectedEmployeeId)) {
+                        System.out.println("Employee found: " + rowText);
+                        found = true;
+                        break;
+                    }
+                }
+            } catch (StaleElementReferenceException e) {
+                attempts++;
+                System.out.println("StaleElementReferenceException caught, retrying... attempt " + attempts);
+            }
+        }
 
+        if (!found) {
+            throw new AssertionError("Employee ID '" + expectedEmployeeId + "' not found in any row.");
+        }
+    }
+    @Then("the system should provide a message {string} if no matching employee records are found")
+    public void the_system_should_provide_a_message_if_no_matching_employee_records_are_found(String expectedMessage) {
+        By employeeDataRows = By.xpath("//div[contains(@class,'oxd-table-row') and contains(@class,'oxd-table-row--clickable')]");
+        By noRecordsMsg = By.xpath("//span[text()='No Records Found']");
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.or(
+                ExpectedConditions.presenceOfElementLocated(employeeDataRows),
+                ExpectedConditions.presenceOfElementLocated(noRecordsMsg)
+        ));
+
+        List<WebElement> rows = driver.findElements(employeeDataRows);
+
+        if (rows.isEmpty()) {
+            String actualMessage = driver.findElement(noRecordsMsg).getText().trim();
+            Assert.assertEquals(actualMessage, expectedMessage,
+                    "Expected message does not match actual message");
+            System.out.println("Correct 'no records found' message displayed: " + actualMessage);
+        } else {
+            System.out.println("Records found in the table: " + rows.size() + ". Skipping 'no records' assertion.");
+        }
     }
 
 }

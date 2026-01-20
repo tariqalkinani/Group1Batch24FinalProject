@@ -5,8 +5,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import java.security.cert.X509Certificate;
-
 public class PimPage extends CommonMethods {
 
     @FindBy(xpath = "//label[contains(normalize-space(),'Employee Name')]/ancestor::div[contains(@class,'oxd-input-group')]//input[@placeholder='Type for hints...']\n")
@@ -35,6 +33,12 @@ public class PimPage extends CommonMethods {
 
     @FindBy(xpath = "//span[@class='oxd-text oxd-text--span']")
     public static WebElement noRecordFoundText;
+
+    @FindBy(xpath = "//div[contains(@class,'oxd-table-row')]")
+    public WebElement employeeRow;
+
+    @FindBy(xpath = "(//div[contains(@class,'oxd-table-row')]//div[contains(@class,'oxd-table-cell')])[2]")
+    public WebElement employeeIdCell;
 
     public PimPage() {
         PageFactory.initElements(driver, this);

@@ -1,22 +1,16 @@
 package Steps;
 
-
 import Pages.AdminPage;
 import Pages.DashboardPage;
 import Pages.LoginPage;
 import Utils.CommonMethods;
 import io.cucumber.java.en.Given;
-import io.cucumber.java.en.When;
 import io.cucumber.java.en.Then;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.PageFactory;
 
-import java.sql.DriverManager;
 import java.time.Duration;
 
 public class CreateLoginDetails extends CommonMethods {
-
-
     @Given("employee is already created in the system and user has access to user management")
     public void employee_is_already_created_in_the_system_and_user_has_access_to_user_management() {
 
@@ -37,7 +31,7 @@ public class CreateLoginDetails extends CommonMethods {
 
     @Then("click add user\\(required fields are marked with *)")
     public void click_add_user_required_fields_are_marked_with() {
-    AdminPage adminPage = new AdminPage();
+        AdminPage adminPage = new AdminPage();
         click(AdminPage.addButton);
 
     }
@@ -90,4 +84,5 @@ public class CreateLoginDetails extends CommonMethods {
 
 
 }
+
 

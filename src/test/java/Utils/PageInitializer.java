@@ -1,6 +1,9 @@
 package Utils;
 
 import Pages.*;
+import org.openqa.selenium.WebElement;
+
+import static Utils.CommonMethods.driver;
 
 public class PageInitializer {
 
@@ -8,16 +11,24 @@ public class PageInitializer {
     public static AddEmployeePage addEmployeePage;
     public static DashboardPage dashboardPage;
     public static EmployeeSearchPage employeeSearchPage;
-    public static ValidateCredentialsPage validateCredentialsPage;
+    public static DependantsPage dependantsPage;
     public static AdminPage adminPage;
+    public static PimPage pimPage;
+    public static UpdateContactPage updateContactPage;
+    public static UploadEmployeeImagePage uploadEmployeeImagePage;
+    public static EditEmployeePage editEmployeePage;
 
     public static void initializePageObjects(){
         loginPage=new LoginPage();
-        addEmployeePage=new AddEmployeePage();
+        addEmployeePage=new AddEmployeePage(driver);
         dashboardPage=new DashboardPage();
         employeeSearchPage=new EmployeeSearchPage();
-        validateCredentialsPage=new ValidateCredentialsPage();
+        dependantsPage=new DependantsPage();
         adminPage=new AdminPage();
+        pimPage=new PimPage();
+        updateContactPage=new UpdateContactPage();
+        updateContactPage=new UpdateContactPage();
+        editEmployeePage=new EditEmployeePage();
 
     }
 }

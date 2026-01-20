@@ -21,8 +21,6 @@ public class LoginPage extends CommonMethods {
     public WebElement errorMessageLoc;
 
     public LoginPage(){
-        //The code we write will be automatically called when you create an object
-        //Page Factory we use to initialize all the elements we use from Selenium and the driver is coming from CM
         PageFactory.initElements(driver,this);
     }
 

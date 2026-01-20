@@ -7,8 +7,6 @@ import org.openqa.selenium.support.PageFactory;
 
 public class AdminPage extends CommonMethods {
 
-
-
     @FindBy(xpath = "//button[@class='oxd-button oxd-button--medium oxd-button--secondary']")
     public static WebElement addButton;
 

@@ -1,6 +1,7 @@
 package Pages;
 
 import Utils.CommonMethods;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -20,10 +21,31 @@ public class AddEmployeePage extends CommonMethods {
     public WebElement saveButton;
 
     @FindBy(xpath = "(//*[@class='oxd-input oxd-input--active'])[2]")
-    public WebElement employeeIdButton;
+    public static WebElement employeeIdButton;
 
-    public AddEmployeePage(){
+    @FindBy(xpath = "//input[@name='firstName']")
+    public static WebElement firstName;
 
-        PageFactory.initElements(driver, this);
+    @FindBy(xpath = "//input[@name='lastName']")
+    public static WebElement lastName;
+
+    @FindBy(xpath = "//input[@class='oxd-input oxd-input--active'][1]")
+    public static WebElement employeeId;
+
+    @FindBy(xpath = "//button[@type='submit']")
+    public static WebElement submitButton;
+
+    @FindBy(xpath = "//a[contains(text(),'Employee List')]")
+    public static WebElement employeeList;
+
+
+    public void enterEmployeeId(String empId) {
+        employeeIdButton.clear();
+        employeeIdButton.sendKeys(empId);
+    }
+
+    public AddEmployeePage(WebDriver driver){
+
+        PageFactory.initElements(CommonMethods.driver, this);
     }
 }
