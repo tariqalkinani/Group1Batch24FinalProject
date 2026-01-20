@@ -10,7 +10,7 @@ public class EmployeeSearchPage extends CommonMethods {
     @FindBy(xpath = "(//*[@class='oxd-input oxd-input--active'])[2]")
     public WebElement empIdSearchField;
 
-    @FindBy(xpath = "//*[@class='oxd-button oxd-button--medium oxd-button--secondary orangehrm-left-space']")
+    @FindBy(xpath = "//button[@class='oxd-button oxd-button--medium oxd-button--secondary orangehrm-left-space']")
     public WebElement searchButton;
 
     @FindBy(xpath = "(//*[@class='oxd-autocomplete-text-input oxd-autocomplete-text-input--active']/input)[1]")

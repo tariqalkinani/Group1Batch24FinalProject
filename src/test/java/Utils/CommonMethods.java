@@ -25,7 +25,9 @@ public class CommonMethods extends PageInitializer{
         switch (Utils.ConfigReader.read("browser")){
 
             case "Chrome":
-                driver=new ChromeDriver();
+                ChromeOptions options = new ChromeOptions();
+                options.addArguments("--headless");
+                driver=new ChromeDriver(options);
                 break;
             case "FireFox":
                 driver=new FirefoxDriver();
@@ -97,6 +99,7 @@ public class CommonMethods extends PageInitializer{
 
 
     public byte[] takeScreenshot(String fileName){
+        //it accepts array of byte in cucumber for the screenshot
         TakesScreenshot ts = (TakesScreenshot) driver;
         byte[] picByte = ts.getScreenshotAs(OutputType.BYTES);
         File sourceFile = ts.getScreenshotAs(OutputType.FILE);
@@ -113,7 +116,10 @@ public class CommonMethods extends PageInitializer{
     }
 
     public String getTimeStamp(String pattern){
+        //this method will return the timestamp which we will add in ss method
         Date date = new Date();
+
+        //yyyy-mm-dd-hh-mm-ss
         SimpleDateFormat sdf = new SimpleDateFormat(pattern);
         return sdf.format(date);
     }
