@@ -16,6 +16,10 @@ public class EmployeeSearchPage extends CommonMethods {
     @FindBy(xpath = "(//*[@class='oxd-autocomplete-text-input oxd-autocomplete-text-input--active']/input)[1]")
     public WebElement empNameSearchField;
 
+    @FindBy(xpath = "(//button[normalize-space()='Add'])")
+    public WebElement addUserButton;
+
+
     public EmployeeSearchPage(){
 
         PageFactory.initElements(driver, this);
